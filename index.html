@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hermes Nexus</title>
+<link rel="stylesheet" href="static/nexus.css">
+</head>
+<body>
+<nav class="topbar">
+  <a href="/hermes" class="logo">
+    <span class="logo-mark">◈</span>
+    <span class="logo-text">Hermes</span>
+  </a>
+  <div class="meta">
+    <span class="badge">Nexus</span>
+    <span class="timestamp" id="now"></span>
+  </div>
+</nav>
+
+<header class="hero">
+  <h1>Agent workspace</h1>
+  <p class="lead">Every task gets a page. Dense, linkable, persistent.</p>
+  <div class="actions">
+    <a href="#active" class="btn">Active <span class="count" id="active-count">0</span></a>
+    <a href="#archive" class="btn ghost">Archive</a>
+  </div>
+</header>
+
+<main class="container">
+  <section id="active">
+    <h2>Active Projects</h2>
+    <div class="project-grid" id="project-grid">
+      <!-- Cards injected by JS -->
+    </div>
+  </section>
+
+  <section id="archive" class="archive">
+    <h2>Archive</h2>
+    <ul class="archive-list" id="archive-list">
+      <!-- Archive items injected by JS -->
+    </ul>
+  </section>
+</main>
+
+<footer>
+  <p>Powered by Hermes · <a href="https://github.com/AnthonyFangqing/hermes">source</a></p>
+</footer>
+
+<script src="static/nexus.js"></script>
+</body>
+</html>

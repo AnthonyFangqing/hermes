@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project 1 — Deployable Site</title>
+<link rel="stylesheet" href="../../static/project.css">
+</head>
+<body>
+<nav class="topbar">
+  <a href="/hermes" class="logo">
+    <span class="logo-mark">◈</span>
+    <span class="logo-text">Hermes</span>
+  </a>
+</nav>
+
+<main class="container article">
+  <div class="breadcrumb">
+    <a href="/hermes">Nexus</a>
+    <span>/</span>
+    <span>Project 1</span>
+  </div>
+
+  <h1 class="page-title">Deployable Site</h1>
+  <p class="page-subtitle">FastAPI starter with a modern dark-themed frontend. Zero build step, one-click deploy.</p>
+
+  <span class="status-pill">Active</span>
+
+  <h2>What it is</h2>
+  <p>A minimal but production-ready web starter. Backend is FastAPI (async, typed, auto-documented). Frontend is hand-written HTML/CSS/JS — no webpack, no node_modules, no build pipeline. The entire stack fits in a single directory and deploys to any Python host in under a minute.</p>
+
+  <h2>Stack</h2>
+  <table>
+    <tr><th>Layer</th><th>Tech</th><th>Why</th></tr>
+    <tr><td>Backend</td><td>FastAPI + Uvicorn</td><td>Async, OpenAPI docs, dependency injection</td></tr>
+    <tr><td>Templating</td><td>Jinja2</td><td>Server-rendered HTML with shared layouts</td></tr>
+    <tr><td>Styling</td><td>Vanilla CSS</td><td>CSS custom properties, no preprocessor</td></tr>
+    <tr><td>Frontend</td><td>Vanilla JS</td><td>Native fetch, no framework weight</td></tr>
+    <tr><td>Deploy</td><td>Railway / Render / Fly.io</td><td>Reads PORT env, single command start</td></tr>
+  </table>
+
+  <h2>File tree</h2>
+  <pre><code>deployable-site/
+├── app.py              # FastAPI app
+├── requirements.txt    # deps
+├── railway.json        # Railway config
+├── templates/
+│   └── index.html      # Jinja2 template
+└── static/
+    ├── style.css       # design system
+    └── script.js       # contact form handler</code></pre>
+
+  <h2>Endpoints</h2>
+  <table>
+    <tr><th>Method</th><th>Path</th><th>Description</th></tr>
+    <tr><td>GET</td><td><code>/</code></td><td>Landing page (server-rendered)</td></tr>
+    <tr><td>GET</td><td><code>/api/health</code></td><td>Health check JSON</td></tr>
+    <tr><td>GET</td><td><code>/api/now</code></td><td>Current UTC time</td></tr>
+    <tr><td>POST</td><td><code>/api/contact</code></td><td>Contact form (FormData)</td></tr>
+  </table>
+
+  <h2>Deploy commands</h2>
+  <p><strong>Railway</strong></p>
+  <pre><code>railway login
+railway init
+railway up</code></pre>
+
+  <p><strong>Render</strong></p>
+  <pre><code>render services create \
+  --name deployable-site \
+  --type web_service \
+  --runtime python \
+  --build-command "pip install -r requirements.txt" \
+  --start-command "uvicorn app:app --host 0.0.0.0 --port \$PORT"</code></pre>
+
+  <p><strong>Local</strong></p>
+  <pre><code>pip install -r requirements.txt
+uvicorn app:app --reload</code></pre>
+
+  <div class="infobox good">
+    <strong>Live demo:</strong> Static version deployed at <a href="https://anthonyfangqing.github.io/deployable-site/">anthonyfangqing.github.io/deployable-site</a>. Full backend requires a Python host.
+  </div>
+
+  <h2>Notes</h2>
+  <ul>
+    <li>Static asset serving uses <code>StaticFiles</code> with <code>html=True</code> so subdirectories work.</li>
+    <li>SPA fallback catches unknown routes and returns the landing page.</li>
+    <li>Jinja2 <code>TemplateResponse</code> signature changed in newer Starlette — pass <code>request</code> as first positional arg, not in the context dict.</li>
+    <li>Railway free tier blocks deploys 8 AM – 8 PM CEST. Render requires a card on file even for free tier.</li>
+  </ul>
+</main>
+
+<footer>
+  <p><a href="/hermes">← Back to Nexus</a></p>
+</footer>
+</body>
+</html>
