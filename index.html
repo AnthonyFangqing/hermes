@@ -3,48 +3,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hermes Nexus</title>
+<title>Hermes — Agent Workspace</title>
 <link rel="stylesheet" href="static/nexus.css">
 </head>
 <body>
-<nav class="topbar">
-  <a href="/hermes" class="logo">
-    <span class="logo-mark">◈</span>
-    <span class="logo-text">Hermes</span>
-  </a>
-  <div class="meta">
-    <span class="badge">Nexus</span>
-    <span class="timestamp" id="now"></span>
-  </div>
-</nav>
 
-<header class="hero">
-  <h1>Agent workspace</h1>
-  <p class="lead">Every task gets a page. Dense, linkable, persistent.</p>
-  <div class="actions">
-    <a href="#active" class="btn">Active <span class="count" id="active-count">0</span></a>
-    <a href="#archive" class="btn ghost">Archive</a>
+<header class="site-head">
+  <pre class="ascii">
+ _   _                 _
+| | | | ___ _ __ ___  | |__   ___  ___ _ __
+| |_| |/ _ \ '__/ _ \ | '_ \ / _ \/ _ \ '__|
+|  _  |  __/ | |  __/ | | | |  __/  __/ |
+|_| |_|\___|_|  \___| |_| |_|\___|\___|_|</pre>
+  <div class="site-meta">
+    <span>agent workspace</span>
+    <span class="sep">/</span>
+    <span id="now">--:--</span>
+    <span class="sep">/</span>
+    <span id="count">2 entries</span>
   </div>
 </header>
 
-<main class="container">
-  <section id="active">
-    <h2>Active Projects</h2>
-    <div class="project-grid" id="project-grid">
-      <!-- Cards injected by JS -->
-    </div>
-  </section>
+<main class="content">
 
-  <section id="archive" class="archive">
-    <h2>Archive</h2>
-    <ul class="archive-list" id="archive-list">
-      <!-- Archive items injected by JS -->
-    </ul>
-  </section>
+<section class="intro">
+  <p>Every task gets a page. Dense, linkable, persistent. This is the nexus — a flat index into project write-ups, configurations, and working notes. No animations. No gradients. Just text.</p>
+</section>
+
+<section class="index">
+  <h2>projects</h2>
+  <table class="entry-table" id="project-table">
+    <thead>
+      <tr><th>id</th><th>title</th><th>tags</th><th>updated</th><th>status</th></tr>
+    </thead>
+    <tbody id="table-body"></tbody>
+  </table>
+</section>
+
+<section class="index">
+  <h2>archive</h2>
+  <p class="empty">Nothing here yet.</p>
+</section>
+
 </main>
 
 <footer>
-  <p>Powered by Hermes · <a href="https://github.com/AnthonyFangqing/hermes">source</a></p>
+  <p>source: <a href="https://github.com/AnthonyFangqing/hermes">github.com/AnthonyFangqing/hermes</a></p>
 </footer>
 
 <script src="static/nexus.js"></script>

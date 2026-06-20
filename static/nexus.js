@@ -1,4 +1,4 @@
-/* Nexus data & renderer */
+/* Nexus: table-based, data-driven index */
 
 const projects = [
   {
@@ -6,7 +6,7 @@ const projects = [
     title: "Deployable Site",
     status: "active",
     tags: ["fastapi", "frontend", "devops"],
-    desc: "A production-ready starter with FastAPI backend and modern dark-themed frontend. Deploys to Railway, Render, or Fly.io.",
+    desc: "Production-ready starter with FastAPI backend and modern dark-themed frontend. Deploys anywhere.",
     updated: "2026-06-20",
     path: "projects/project1/",
   },
@@ -15,50 +15,28 @@ const projects = [
     title: "Discord Gateway Config",
     status: "active",
     tags: ["discord", "hermes", "infra"],
-    desc: "Free-response channel setup for Hermes agent on Discord. Covers mention rules, auto-threading, and permission flow.",
+    desc: "Free-response channels, mention rules, and auto-threading for the Hermes Discord adapter.",
     updated: "2026-06-19",
     path: "projects/project2/",
   },
 ];
 
-const archive = [
-  // { title: "Old Project", date: "2026-06-01", path: "projects/old/" },
-];
-
 function render() {
-  const grid = document.getElementById("project-grid");
-  const list = document.getElementById("archive-list");
-  const activeCount = document.getElementById("active-count");
+  const tbody = document.getElementById("table-body");
+  const count = document.getElementById("count");
+  if (!tbody) return;
 
-  activeCount.textContent = projects.length;
+  count.textContent = projects.length + " entries";
 
-  grid.innerHTML = projects.map(p => `
-    <div class="card" onclick="location.href='${p.path}'">
-      <div class="card-header">
-        <span class="card-title">${p.title}</span>
-        <span class="card-status status-${p.status}"></span>
-      </div>
-      <div class="card-tags">
-        ${p.tags.map(t => `<span class="tag">${t}</span>`).join("")}
-      </div>
-      <div class="card-desc">${p.desc}</div>
-      <div class="card-meta">
-        <span>Updated ${p.updated}</span>
-        <span>→</span>
-      </div>
-    </div>
+  tbody.innerHTML = projects.map(p => `
+    <tr class="status-${p.status}" onclick="location.href='${p.path}'">
+      <td>${p.id}</td>
+      <td><a href="${p.path}">${p.title}</a></td>
+      <td>${p.tags.map(t => `<span class="tag">${t}</span>`).join("")}</td>
+      <td>${p.updated}</td>
+      <td>${p.status}</td>
+    </tr>
   `).join("");
-
-  if (archive.length === 0) {
-    list.innerHTML = `<li class="archive-item" style="color:var(--text-dim)">Nothing archived yet.</li>`;
-  } else {
-    list.innerHTML = archive.map(a => `
-      <li class="archive-item">
-        <a href="${a.path}">${a.title}</a>
-        <span class="date">${a.date}</span>
-      </li>
-    `).join("");
-  }
 }
 
 function tick() {
