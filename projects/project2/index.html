@@ -8,7 +8,7 @@
 </head>
 <body>
 <nav class="topbar">
-  <a href="/hermes">← nexus</a>
+  <a href="/hermes">&#8592; nexus</a>
 </nav>
 
 <main class="container article">
@@ -17,28 +17,28 @@
   </div>
 
   <h1 class="page-title">Discord Gateway Config</h1>
-  <p class="page-subtitle">Free-response channels, mention rules, and auto-threading for the Hermes Discord adapter.</p>
+  <p class="page-subtitle">Making the bot reply without @mentions in some channels.</p>
 
   <span class="status-pill active">active</span>
 
   <h2>Context</h2>
-  <p>Hermes connects to Discord via the <code>DiscordAdapter</code> plugin. By default, the bot only responds when explicitly @mentioned in server channels. This is sane default behavior, but for some channels you want the bot to reply to every message — no mention required.</p>
+  <p>Hermes connects to Discord via the DiscordAdapter plugin. By default it only answers when @mentioned in server channels. I wanted it to reply to everything in specific channels.</p>
 
   <h2>What was configured</h2>
-  <p>Three mechanisms control how Hermes listens on Discord:</p>
+  <p>Three toggles control how Hermes listens:</p>
   <ul>
-    <li><strong>Require mention</strong> — global toggle. If true, messages in server channels need an @bot mention. DMs and known threads are exempt.</li>
-    <li><strong>Free response channels</strong> — allowlist of channel IDs where mention is skipped even if require-mention is globally enabled.</li>
-    <li><strong>Auto-threading</strong> — when enabled, the bot creates a thread per conversation in free-response channels so replies stay scoped.</li>
+    <li>Require mention: global toggle. When on, server messages need an @bot. DMs and known threads are exempt.</li>
+    <li>Free response channels: list of channel IDs where the mention rule is skipped.</li>
+    <li>Auto-threading: the bot spawns a thread per conversation in free-response channels so replies do not clutter the main channel.</li>
   </ul>
 
   <h2>Config options</h2>
   <table>
     <tr><th>Variable / Key</th><th>Type</th><th>Default</th><th>Effect</th></tr>
-    <tr><td><code>DISCORD_REQUIRE_MENTION</code></td><td>bool</td><td>true</td><td>If true, server messages need @mention</td></tr>
+    <tr><td><code>DISCORD_REQUIRE_MENTION</code></td><td>bool</td><td>true</td><td>Server messages need @mention</td></tr>
     <tr><td><code>DISCORD_FREE_RESPONSE_CHANNELS</code></td><td>str/list</td><td>[]</td><td>Channel IDs where mention is waived</td></tr>
     <tr><td><code>DISCORD_AUTO_THREAD</code></td><td>bool</td><td>true</td><td>Auto-create thread per conversation</td></tr>
-    <tr><td><code>DISCORD_ALLOWED_USERS</code></td><td>str</td><td>"*"</td><td>User IDs allowed to DM the bot</td></tr>
+    <tr><td><code>DISCORD_ALLOWED_USERS</code></td><td>str</td><td>"*"</td><td>Users allowed to DM the bot</td></tr>
   </table>
 
   <h2>YAML config example</h2>
@@ -51,29 +51,29 @@
     auto_thread: true</code></pre>
 
   <h2>Code flow</h2>
-  <p>When a message arrives, <code>_handle_message</code> runs these checks in order:</p>
+  <p>When a message arrives, <code>_handle_message</code> runs these checks:</p>
   <ol>
-    <li>Bot mention filter — if other bots are mentioned but not this one, drop the message.</li>
-    <li>Ignore-no-mention logic — if the message mentions humans but not this bot, drop unless in a free-response channel.</li>
-    <li>Free-response check — if the channel ID (or its parent forum ID) is in the allowlist, skip the mention requirement.</li>
-    <li>Thread tracking — if the bot has already participated in this thread, replies don't need mentions.</li>
-    <li>Auto-thread — if enabled and the channel is a text channel, spawn a thread and route replies there.</li>
+    <li>Bot mention filter: if other bots are mentioned but not this one, drop the message.</li>
+    <li>Ignore-no-mention: if the message mentions humans but not this bot, drop unless the channel is in the free-response list.</li>
+    <li>Free-response check: if the channel ID (or its parent forum ID) is in the list, skip the mention rule.</li>
+    <li>Thread tracking: if the bot already replied in this thread, replies do not need mentions.</li>
+    <li>Auto-thread: if enabled and the channel is text, spawn a thread and route replies there.</li>
   </ol>
 
   <div class="infobox warn">
-    <strong>Edge case:</strong> YAML parses bare integers as <code>int</code>, not <code>str</code>. The adapter coerces scalar values with <code>str(raw)</code> so <code>free_response_channels: 1491973769726791812</code> works without quotes.
+    YAML parses bare integers as <code>int</code>, not <code>str</code>. The adapter coerces scalar values with <code>str(raw)</code> so <code>free_response_channels: 1491973769726791812</code> works without quotes.
   </div>
 
   <h2>References</h2>
   <ul>
-    <li>Source: <code>plugins/platforms/discord/adapter.py</code> — <code>_handle_message</code> and <code>_discord_free_response_channels</code></li>
+    <li>Source: <code>plugins/platforms/discord/adapter.py</code> -- <code>_handle_message</code> and <code>_discord_free_response_channels</code></li>
     <li>Tests: <code>tests/plugins/platforms/discord/test_defaults.py</code></li>
-    <li>Config bridge: <code>gateway/config.py</code> — YAML → env var mapping</li>
+    <li>Config bridge: <code>gateway/config.py</code> -- YAML to env var mapping</li>
   </ul>
 </main>
 
 <footer>
-  <p><a href="/hermes">← nexus</a></p>
+  <p><a href="/hermes">&#8592; nexus</a></p>
 </footer>
 </body>
 </html>
