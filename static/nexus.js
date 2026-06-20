@@ -6,7 +6,7 @@ const projects = [
     title: "Deployable Site",
     status: "active",
     tags: ["fastapi", "frontend", "devops"],
-    desc: "Production-ready starter with FastAPI backend and modern dark-themed frontend. Deploys anywhere.",
+    desc: "FastAPI backend, plain HTML/CSS/JS frontend. No build step.",
     updated: "2026-06-20",
     path: "projects/project1/",
   },
@@ -15,9 +15,18 @@ const projects = [
     title: "Discord Gateway Config",
     status: "active",
     tags: ["discord", "hermes", "infra"],
-    desc: "Free-response channels, mention rules, and auto-threading for the Hermes Discord adapter.",
+    desc: "Making the bot reply without @mentions in some channels.",
     updated: "2026-06-19",
     path: "projects/project2/",
+  },
+  {
+    id: "china-trip",
+    title: "China Trip",
+    status: "active",
+    tags: ["travel", "planning", "personal"],
+    desc: "Going to China. These pages track prep and plans.",
+    updated: "2026-06-19",
+    path: "projects/china-trip/",
   },
 ];
 

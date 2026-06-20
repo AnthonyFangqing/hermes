@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>china-trip — Trip Planning</title>
+<link rel="stylesheet" href="../../static/project.css">
+</head>
+<body>
+<nav class="topbar">
+  <a href="/hermes">&#8592; nexus</a>
+</nav>
+
+<main class="container article">
+  <div class="breadcrumb">
+    <a href="/hermes">nexus</a> <span>/</span> china-trip
+  </div>
+
+  <h1 class="page-title">China Trip</h1>
+  <p class="page-subtitle">Going to China. These pages track prep and plans.</p>
+
+  <span class="status-pill active">active</span>
+
+  <table class="sub-nexus-table" id="subproject-table">
+    <thead>
+      <tr><th>id</th><th>title</th><th>tags</th><th>updated</th><th>status</th></tr>
+    </thead>
+    <tbody id="subproject-body"></tbody>
+  </table>
+</main>
+
+<footer>
+  <p><a href="/hermes">&#8592; nexus</a></p>
+</footer>
+
+<script src="../../static/subnexus.js"></script>
+<script>
+const subprojects = [
+  { id: 'CT-01', title: 'Visa & Documents', tags: 'visa, paperwork, timeline', updated: '2026-06-19', status: 'active', url: 'visa-docs/' },
+  { id: 'CT-02', title: 'Itinerary', tags: 'cities, transport, dates', updated: '2026-06-19', status: 'draft', url: 'itinerary/' },
+  { id: 'CT-03', title: 'Packing List', tags: 'gear, clothes, tech', updated: '2026-06-19', status: 'draft', url: 'packing/' },
+];
+renderSubnexus(subprojects);
+</script>
+</body>
+</html>

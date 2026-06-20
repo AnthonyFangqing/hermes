@@ -193,6 +193,37 @@ body {
 .infobox.good   { border-left-color: var(--accent-2); }
 .infobox.danger { border-left-color: #b85c5c; }
 
+/* Sub-nexus table (china-trip) */
+.sub-nexus-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-top: 16px;
+}
+.sub-nexus-table th,
+.sub-nexus-table td {
+  border: 1px solid var(--border);
+  padding: 6px 10px;
+  text-align: left;
+}
+.sub-nexus-table th {
+  background: var(--bg-2);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--fg-dim);
+  font-weight: 600;
+}
+.sub-nexus-table tr:hover { background: var(--bg-2); }
+.sub-nexus-table a { text-decoration: none; color: var(--accent); }
+.sub-nexus-table a:hover { text-decoration: underline; }
+
+/* Inline status cells in tables */
+.status-done     { color: var(--accent-2); }
+.status-pending  { color: var(--accent); }
+.status-blocked  { color: #b85c5c; }
+
 .infobox strong {
   color: var(--fg-bright);
   font-weight: 600;
